@@ -1,0 +1,1 @@
+{"node_fields":["name","type","x","y","population","exitCapacity"],"edge_fields":["id","a","b","weight","capacity","accessible"],"status":"synthetic benchmark"}

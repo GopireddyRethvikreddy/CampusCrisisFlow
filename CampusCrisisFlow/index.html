@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus CrisisFlow — Working Prototype</title>
+<link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="eyebrow">DAA • DYNAMIC GRAPH OPTIMIZATION • FINAL WORKING PROTOTYPE</div>
+    <h1>Campus CrisisFlow</h1>
+    <p>Emergency evacuation, crowd redistribution, accessibility and fairness-aware optimization</p>
+  </div>
+  <div class="status" id="statusBadge">SYSTEM READY</div>
+</header>
+
+
+
+<main>
+<section id="simulation" class="tab-panel active">
+  <div class="grid">
+    <section class="card map-card">
+      <div class="card-head">
+        <div>
+          <h2>Campus Digital Twin</h2>
+          <p id="scenarioText">Normal campus state</p>
+        </div>
+        <div class="legend">
+          <span><i class="dot building"></i>Building</span>
+          <span><i class="dot exit"></i>Exit</span>
+          <span><i class="dot danger"></i>Blocked</span>
+          <span><i class="route-line"></i>Route</span>
+        </div>
+      </div>
+      <div id="map" class="map"></div>
+      <div class="controls">
+        <button id="runDijkstra" class="primary">Dijkstra</button>
+        <button id="runAStar">A*</button>
+        <button id="runMaxFlow" class="success">Max-Flow</button>
+        <button id="runCrisis" class="accent">CrisisFlow Optimize</button>
+        <button id="blockCorridor">Inject Hazard</button>
+        <button id="reset">Reset</button>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card">
+        <h2>Emergency Scenario</h2>
+        <label>Source building<select id="source"></select></label>
+        <label>Target exit<select id="targetExit"></select></label>
+        <label>Evacuees<input id="people" type="number" min="1" max="10000" value="1000"></label>
+        <label>Optimization mode
+          <select id="mode">
+            <option value="balanced">Balanced</option>
+            <option value="speed">Fastest evacuation</option>
+            <option value="fairness">Fairness first</option>
+            <option value="accessibility">Accessibility first</option>
+          </select>
+        </label>
+        <label>Congestion weight
+          <input id="congestionWeight" type="range" min="0" max="1000" value="300" />
+          <span id="congestionValue" class="range-value">300</span>
+        </label>
+        <label><input id="wheelchair" type="checkbox" /> Simulate wheelchair-accessible route</label>
+        <button id="triggerEmergency" class="danger-btn">TRIGGER EMERGENCY</button>
+      </section>
+
+      <section class="card">
+        <h2>Live Metrics</h2>
+        <div class="metric"><span>Algorithm</span><strong id="mAlgorithm">—</strong></div>
+        <div class="metric"><span>Route / Scope</span><strong id="mScope">—</strong></div>
+        <div class="metric"><span>Travel time</span><strong id="mTime">—</strong></div>
+        <div class="metric"><span>People / Flow</span><strong id="mPeople">—</strong></div>
+        <div class="metric"><span>Congestion</span><strong id="mCongestion">—</strong></div>
+        <div class="metric"><span>Fairness</span><strong id="mFairness">—</strong></div>
+        <div class="metric"><span>Status</span><strong id="mStatus">READY</strong></div>
+      </section>
+
+      <section class="card">
+        <h2>Optimization Result</h2>
+        <div id="result" class="result">Run an algorithm to see results.</div>
+      </section>
+
+      <section class="card mini">
+        <h2>DAA Stack</h2>
+        <div class="chips">
+          <span>Dijkstra</span><span>A*</span><span>Heap</span><span>Max-Flow</span>
+          <span>Dynamic Graph</span><span>Multi-Criteria</span><span>Accessibility</span>
+          <span>Fairness</span>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <section class="card dashboard-card">
+    <div class="dashboard-grid">
+      <div>
+        <h2>Exit Utilization</h2>
+        <div id="exitBars"></div>
+      </div>
+      <div>
+        <h2>Corridor Load</h2>
+        <div id="edgeBars"></div>
+      </div>
+      <div>
+        <h2>Evacuation Groups</h2>
+        <div id="groupTable"></div>
+      </div>
+    </div>
+  </section>
+</section>
+
+
+    <section class="card">
+      <h2>30-second viva answer</h2>
+      <blockquote>
+        “Campus CrisisFlow treats emergency evacuation as a dynamic graph optimization problem. Dijkstra and A* solve individual shortest paths, Max-Flow handles network capacity across multiple exits, and our CrisisFlow layer adds congestion, accessibility and fairness constraints. We compare the algorithms experimentally using evacuation time, congestion, fairness and runtime.”
+      </blockquote>
+      <h3>Important limitation</h3>
+      <p>The included graph is a synthetic benchmark. It must be replaced or validated with a real campus map before making real safety claims.</p>
+      <h3>Authentication and privacy</h3>
+      <p>No passwords, OTPs, payment secrets or authentication tokens are collected by this prototype.</p>
+    </section>
+  </div>
+</section>
+</main>
+
+<script src="src/graph.js"></script>
+<script src="src/algorithms.js"></script>
+
+<script src="src/app.js"></script>
+</body>
+</html>
